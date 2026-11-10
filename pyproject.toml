@@ -1,0 +1,52 @@
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | __pycache__
+  | migrations
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+exclude = [
+    ".git",
+    ".venv",
+    "migrations",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # Erreurs pycodestyle
+    "W",   # Avertissements pycodestyle
+    "F",   # Détections pyflakes (imports inutilisés, variables non définies)
+    "I",   # Tri automatique des imports (isort)
+    "B",   # Détection de bugs courants (flake8-bugbear)
+    "C4",  # Bonnes pratiques sur les compréhensions (flake8-comprehensions)
+]
+ignore = ["E501"] # La longueur de ligne max est gérée par Black
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers"
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "app/templates/*",
+    "migrations/*",
+    "tests/*",
+]
+
+[tool.coverage.report]
+fail_under = 75
+show_missing = true
