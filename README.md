@@ -4,12 +4,6 @@ Projet académique réalisé dans le cadre du module **DevOps et Conteneurisatio
 
 ---
 
-## 👥 Binôme
-- **Étudiant A (Orienté Application & Qualité) :** Binôme A
-- **Étudiant B (Orienté DevOps & Infrastructure) :** Binôme B
-
----
-
 ## 🛠️ Stack Technique
 - **Backend :** FastAPI, SQLAlchemy, Alembic, Pydantic
 - **Base de données :** PostgreSQL 16

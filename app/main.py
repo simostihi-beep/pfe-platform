@@ -13,6 +13,7 @@ app = FastAPI(
         "avec CI/CD, sécurité et observabilité. (ENSA Fès)"
     ),
     version="1.0.0",
+    debug=settings.DEBUG,
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -30,8 +31,7 @@ app.add_middleware(
 app.include_router(health_router)
 app.include_router(auth_router)
 
-# Instrumentation Prometheus automatique pour les métriques (Section 3.4)
-# Expose l'endpoint /metrics
+# Instrumentation Prometheus pour les métriques (/metrics)
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
 

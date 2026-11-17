@@ -4,8 +4,9 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from app.core.database import get_db
+from app.core.config import settings
 
-router = APIRouter(tags=["Health"])
+router = APIRouter(tags=["monitoring"])
 
 
 @router.get("/health", summary="Vérification de l'état de l'application et de la base de données")
@@ -16,7 +17,6 @@ def healthcheck(db: Session = Depends(get_db)):
     """
     db_status = "healthy"
     try:
-        # Exécution d'un ping léger sur la base de données
         db.execute(text("SELECT 1"))
     except Exception as e:
         db_status = f"unhealthy: {str(e)}"
@@ -24,11 +24,13 @@ def healthcheck(db: Session = Depends(get_db)):
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             content={
                 "status": "unhealthy",
+                "environment": settings.ENVIRONMENT,
                 "database": db_status,
             },
         )
 
     return {
-        "status": "healthy",
+        "status": "ok",
+        "environment": settings.ENVIRONMENT,
         "database": db_status,
     }
