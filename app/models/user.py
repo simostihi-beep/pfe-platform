@@ -21,7 +21,7 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     role = Column(
-        Enum(UserRole, name="user_role", create_type=False),
+        Enum(UserRole, name="user_role", create_type=False, values_callable=lambda x: [e.value for e in x]),
         default=UserRole.STUDENT,
         nullable=False,
     )

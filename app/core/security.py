@@ -34,8 +34,8 @@ def create_access_token(
     payload = {
         "sub": str(subject),
         "role": role,
-        "iat": now,
-        "exp": expire,
+        "iat": int(now.timestamp()),
+        "exp": int(expire.timestamp()),
     }
 
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)

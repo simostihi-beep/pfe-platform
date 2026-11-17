@@ -19,7 +19,9 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = "pfe_db"
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
-    DATABASE_URL: str = "postgresql://pfe_user:pfe_password@localhost:5432/pfe_db"
+    DATABASE_URL: str = (
+        "postgresql+psycopg2://pfe_user:pfe_password@localhost:5432/pfe_db"
+    )
 
     # ==========================================================================
     # Sécurité & Authentification JWT

@@ -22,7 +22,7 @@ class Project(Base):
     description = Column(Text, nullable=False)
     company = Column(String(255), nullable=True)
     status = Column(
-        Enum(ProjectStatus, name="project_status", create_type=False),
+        Enum(ProjectStatus, name="project_status", create_type=False, values_callable=lambda x: [e.value for e in x]),
         default=ProjectStatus.DRAFT,
         nullable=False,
     )
