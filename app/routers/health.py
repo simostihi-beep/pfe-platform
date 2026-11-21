@@ -1,15 +1,20 @@
 """Route de santé (Healthcheck) pour Docker, Kubernetes et le monitoring."""
+
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import JSONResponse
-from sqlalchemy.orm import Session
 from sqlalchemy import text
-from app.core.database import get_db
+from sqlalchemy.orm import Session
+
 from app.core.config import settings
+from app.core.database import get_db
 
 router = APIRouter(tags=["monitoring"])
 
 
-@router.get("/health", summary="Vérification de l'état de l'application et de la base de données")
+@router.get(
+    "/health",
+    summary="Vérification de l'état de l'application et de la base de données",
+)
 def healthcheck(db: Session = Depends(get_db)):
     """
     Endpoint appelé par le HEALTHCHECK Docker et le système de monitoring.

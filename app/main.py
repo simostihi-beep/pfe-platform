@@ -1,10 +1,11 @@
 """Point d'entrée principal de l'application FastAPI."""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from app.core.config import settings
-from app.routers import health_router, auth_router
+from app.routers import auth_router, health_router, projects_router, web_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -30,6 +31,8 @@ app.add_middleware(
 # Enregistrement des routers
 app.include_router(health_router)
 app.include_router(auth_router)
+app.include_router(projects_router)
+app.include_router(web_router)
 
 # Instrumentation Prometheus pour les métriques (/metrics)
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")

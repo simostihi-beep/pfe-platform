@@ -1,6 +1,8 @@
 """Modèles SQLAlchemy pour la gestion des soutenances et des jurys."""
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Table
+
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
+
 from app.core.database import Base
 
 # Table d'association Many-to-Many entre Soutenances et Enseignants/Jurys

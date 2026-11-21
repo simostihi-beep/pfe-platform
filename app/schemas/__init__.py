@@ -1,13 +1,28 @@
-"""Export centralisé des schémas Pydantic."""
-from app.schemas.token import Token, TokenData, LoginRequest
-from app.schemas.user import UserBase, UserCreate, UserUpdate, UserResponse
+"""Point d'entrée du package schemas."""
+
+from app.schemas.project import (
+    ProjectAssignSupervisor,
+    ProjectBase,
+    ProjectCreate,
+    ProjectResponse,
+    ProjectStatusUpdate,
+    ProjectUpdate,
+)
+from app.schemas.token import LoginRequest, Token, TokenData
+from app.schemas.user import UserBase, UserCreate, UserResponse, UserUpdate
 
 __all__ = [
-    "Token",
-    "TokenData",
-    "LoginRequest",
     "UserBase",
     "UserCreate",
     "UserUpdate",
     "UserResponse",
+    "Token",
+    "TokenData",
+    "LoginRequest",
+    "ProjectBase",
+    "ProjectCreate",
+    "ProjectUpdate",
+    "ProjectStatusUpdate",
+    "ProjectAssignSupervisor",
+    "ProjectResponse",
 ]

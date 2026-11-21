@@ -1,5 +1,7 @@
 """Dépendances FastAPI pour l'authentification et le contrôle d'accès basé sur les rôles (RBAC)."""
+
 from typing import List
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -34,7 +36,7 @@ def get_current_user(
     try:
         user_id = int(user_id_str)
     except ValueError:
-        raise credentials_exception
+        raise credentials_exception from None
 
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
@@ -45,6 +47,7 @@ def get_current_user(
 
 def require_roles(allowed_roles: List[UserRole]):
     """Vérifie que l'utilisateur connecté possède l'un des rôles autorisés."""
+
     def role_checker(current_user: User = Depends(get_current_user)) -> User:
         if current_user.role not in allowed_roles:
             raise HTTPException(

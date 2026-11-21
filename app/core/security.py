@@ -1,8 +1,11 @@
 """Utilitaires de hachage de mots de passe et de gestion des JWT."""
+
 from datetime import datetime, timedelta, timezone
-from typing import Optional, Any, Union
+from typing import Any, Optional, Union
+
+from jose import JWTError, jwt
 from passlib.context import CryptContext
-from jose import jwt, JWTError
+
 from app.core.config import settings
 
 # Configuration du contexte de hachage de mots de passe (bcrypt)

@@ -1,13 +1,17 @@
 """Modèle SQLAlchemy représentant un utilisateur de la plateforme."""
+
 import enum
-from sqlalchemy import Column, Integer, String, DateTime, Enum
-from sqlalchemy.sql import func
+
+from sqlalchemy import Column, DateTime, Enum, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
+
 from app.core.database import Base
 
 
 class UserRole(str, enum.Enum):
     """Rôles définis dans le cahier des charges (Section 1.1)."""
+
     STUDENT = "student"
     SUPERVISOR = "supervisor"
     ADMIN = "admin"
@@ -21,7 +25,12 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     role = Column(
-        Enum(UserRole, name="user_role", create_type=False, values_callable=lambda x: [e.value for e in x]),
+        Enum(
+            UserRole,
+            name="user_role",
+            create_type=False,
+            values_callable=lambda x: [e.value for e in x],
+        ),
         default=UserRole.STUDENT,
         nullable=False,
     )

@@ -1,17 +1,21 @@
 """Modèle SQLAlchemy représentant un projet PFE."""
+
 import enum
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Enum
-from sqlalchemy.sql import func
+
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
+
 from app.core.database import Base
 
 
 class ProjectStatus(str, enum.Enum):
     """Workflow de validation d'un sujet PFE (Section 1.2)."""
-    DRAFT = "draft"          # Brouillon
+
+    DRAFT = "draft"  # Brouillon
     SUBMITTED = "submitted"  # Soumis pour examen
     VALIDATED = "validated"  # Validé par l'encadrant
-    REJECTED = "rejected"    # Refusé avec motif/commentaire
+    REJECTED = "rejected"  # Refusé avec motif/commentaire
 
 
 class Project(Base):
@@ -22,7 +26,12 @@ class Project(Base):
     description = Column(Text, nullable=False)
     company = Column(String(255), nullable=True)
     status = Column(
-        Enum(ProjectStatus, name="project_status", create_type=False, values_callable=lambda x: [e.value for e in x]),
+        Enum(
+            ProjectStatus,
+            name="project_status",
+            create_type=False,
+            values_callable=lambda x: [e.value for e in x],
+        ),
         default=ProjectStatus.DRAFT,
         nullable=False,
     )

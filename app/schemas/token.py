@@ -1,6 +1,9 @@
 """Schémas Pydantic pour l'authentification et les tokens."""
+
 from typing import Optional
+
 from pydantic import BaseModel, EmailStr, Field
+
 from app.models.user import UserRole
 
 
