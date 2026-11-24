@@ -9,27 +9,25 @@ class Settings(BaseSettings):
     # ==========================================================================
     PROJECT_NAME: str = "Plateforme de Gestion des Projets PFE"
     ENVIRONMENT: str = "development"
-    DEBUG: bool = True
+    DEBUG: bool = False
     APP_PORT: int = 8000
 
     # ==========================================================================
     # Base de données PostgreSQL
     # ==========================================================================
-    POSTGRES_USER: str = "pfe_user"
-    POSTGRES_PASSWORD: str = "pfe_password"
-    POSTGRES_DB: str = "pfe_db"
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
-    DATABASE_URL: str = (
-        "postgresql+psycopg2://pfe_user:pfe_password@localhost:5432/pfe_db"
-    )
+    DATABASE_URL: str
 
     # ==========================================================================
     # Sécurité & Authentification JWT
     # ==========================================================================
-    SECRET_KEY: str = "default_insecure_key_please_change_in_production_32chars"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     # ==========================================================================
     # CORS
