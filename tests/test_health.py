@@ -1,11 +1,11 @@
+"""Test du endpoint de vérification de santé (healthcheck)."""
+
 from fastapi.testclient import TestClient
 
-from app.main import app
 
-client = TestClient(app)
-
-
-def test_health_returns_ok():
+def test_health_returns_ok(client: TestClient):
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json()["status"] == "ok"
+    data = response.json()
+    assert data["status"] == "ok"
+    assert data["database"] == "healthy"
