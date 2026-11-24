@@ -9,7 +9,7 @@ python-multipart>=0.0.12
 # Validation de données & Configuration
 # ==============================================================================
 pydantic>=2.9.0
-pydantic-settings>=2.6.0
+pydantic-settings>=2.16.3
 email-validator>=2.2.0
 
 # ==============================================================================
